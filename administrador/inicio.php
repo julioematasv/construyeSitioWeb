@@ -11,29 +11,47 @@
   </head>
   <body>
 
-    <nav class="nav justify-content-center">
-      <a class="nav-link active" href="#">Administrador del sitio web</a>
-      <a class="nav-link" href="#">Inicio</a>
-      <a class="nav-link" href="#">Libros</a>
-      <a class="nav-link" href="#">Cerrar Sesión</a>
-      <a class="nav-link" href="#">Ver Sitio Web</a>
-    </nav>
+    <nav class="nav justify-content-center bg-primary"><!-- inicio de nav -->
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-        <div class="jumbotron">
-          <h1 class="display-3">Pagina de inicio</h1>
-          <p class="lead">Jumbo Lorem ipsum dolor sit amet consectetur.</p>
-          <hr class="my-2">
-          <p>More info</p>
-          <p class="lead">
-            <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">Jumbo action name</a>
-          </p>
-   </div>
+      <a class="nav-link active text-white" href="#">Administrador del sitio web</a>
+      <a class="nav-link text-white" href="#">Inicio</a>
+      <a class="nav-link text-white" href="#">Libros</a>
+      <a class="nav-link text-white" href="#">Cerrar Sesión</a>
+      <a class="nav-link text-white" href="#">Ver Sitio Web</a>
+
+    </nav><!-- fin de nav -->
+
+    <div class="container"><!-- Div inicio de container -->
+
+      <div class="row"><!-- Div inicio de row contenido -->
+
+        <div class="col-md-12"><!-- Div inicio de col md 12 -->
+
+          <div class="jumbotron"><!-- Div inicio de jumbotron -->
+
+            <h1 class="display-3">Pagina de inicio</h1>
+            <p class="lead">Jumbo Lorem ipsum dolor sit amet consectetur.</p>
+            <hr class="my-2">
+            <p>More info</p>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">Jumbo action name</a>
+            </p>
+
+          </div><!-- fin de jumbotron -->
+
+        </div><!-- fin de col md 12 -->
+
+      </div><!-- fin de row contenido -->
+      
+    </div><!-- fin de container -->  
+
+    <div class="row"><!-- Div inicio de row footer -->
+
+        <div class="col-12 bg-primary text-white text-lg-center pt-3">
+          <p>Footer Lorem ipsum dolor sit amet.</p>
         </div>
-      </div>
-    </div>  
+        
+      </div><!-- fin de row footer -->
    
   </body>
 </html>
