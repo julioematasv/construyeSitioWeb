@@ -20,9 +20,9 @@
 
         <div class="col-md-4">
 
-          <div class="card">
+          <div class="card shadow">
 
-            <div class="card-header text-center">
+            <div class="card-header text-center bg-primary text-white">
               <h2>Ingresar</h2>
             </div>
             <div class="card-body">
