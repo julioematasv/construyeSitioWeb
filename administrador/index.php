@@ -1,3 +1,11 @@
+<?php
+  if($_POST)
+  {
+    header('Location: inicio.php');
+  }
+
+ ?>
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -27,7 +35,7 @@
             </div>
             <div class="card-body">
               
-              <form><!-- Inicio del formulario -->
+              <form method="post" action=""><!-- Inicio del formulario -->
 
               <div class = "form-group">
 
