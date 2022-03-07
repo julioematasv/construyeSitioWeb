@@ -44,7 +44,10 @@
 
               </div>
               
-              <button type="submit" class="btn btn-primary">Entrar al administrador</button>
+              <button type="submit" class="btn btn-primary">
+                Entrar al administrador
+              </button>
+
               </form>
               
               
