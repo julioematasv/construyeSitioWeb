@@ -18,16 +18,16 @@
           <!-- Div vacio para desplazar al centro la card -->
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4">  <!-- Div contenedor de la card -->
 
-          <div class="card shadow">
+          <div class="card shadow"><!-- Div inicio de la card -->
 
             <div class="card-header text-center bg-primary text-white">
               <h2>Ingresar</h2>
             </div>
             <div class="card-body">
               
-              <form>
+              <form><!-- Inicio del formulario -->
 
               <div class = "form-group">
 
@@ -48,18 +48,19 @@
                 Entrar al administrador
               </button>
 
-              </form>
+              </form><!-- fin del formulario -->
               
               
 
             </div>
             
-          </div>
+          </div><!-- fin de la card -->
 
-        </div>
+        </div><!-- fin contenedor de la card -->
         
-      </div>
-    </div>
+      </div><!-- fin row -->
+
+    </div><!-- fin container -->
 
   </body>
 </html>
