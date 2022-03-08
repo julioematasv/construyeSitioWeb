@@ -11,13 +11,15 @@
   </head>
   <body>
 
+<?php $url = "http://".$_SERVER['HTTP_HOST']."/Develoteca/construyeSitioWeb" ?>
+
     <nav class="nav justify-content-center bg-primary"><!-- inicio de nav -->
 
       <a class="nav-link active text-white" href="#">Administrador del sitio web</a>
-      <a class="nav-link text-white" href="#">Inicio</a>
-      <a class="nav-link text-white" href="#">Libros</a>
-      <a class="nav-link text-white" href="#">Cerrar Sesión</a>
-      <a class="nav-link text-white" href="#">Ver Sitio Web</a>
+      <a class="nav-link text-white" href="<?php echo $url; ?>/administrador/inicio.php">Inicio</a>
+      <a class="nav-link text-white" href="<?php echo $url; ?>/administrador/seccion/productos.php">Libros</a>
+      <a class="nav-link text-white" href="<?php echo $url; ?>/administrador/seccion/cerrar.php">Cerrar Sesión</a>
+      <a class="nav-link text-white" href="<?php echo $url; ?>">Ver Sitio Web</a>
 
     </nav><!-- fin de nav -->
 
