@@ -48,7 +48,32 @@
     </div><!-- final col md 5  -->
 
     <div class="col-md-7"><!-- Inicio col md 7  -->
-      tabla con libros
+
+      <table class="table table table-striped table-bordered table-hover"><!-- Inicio tabla  -->
+
+        <thead><!-- Cabecera tabla  -->
+          <tr>
+            <th>ID Libros</th>
+            <th>Nombre Libro</th>
+            <th>Imagen Libro</th>
+            <th>Acciones</th>
+          </tr>
+        </thead><!-- final cabecera tabla  -->
+
+        <tbody><!-- Inicio cuerpo tabla  -->
+
+          <tr>
+
+            <td>5</td>
+            <td>Aprende PHP</td>
+            <td>imagen.jpg</td>
+            <td>Seleccionar | Borrar</td>
+          </tr>
+
+        </tbody><!-- final cuerpo tabla  -->
+
+      </table><!-- final tabla  -->
+
     </div><!-- final col md 7  -->
 
 <?php include("../template/footer.php");  ?>
