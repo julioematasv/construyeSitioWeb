@@ -1,4 +1,12 @@
 <?php include("../template/cabecera.php");  ?>
+<?php
+
+print_r($_POST);
+
+print_r($_FILES);
+
+
+?>
 
     <div class="col-md-5"><!-- Inicio col md 5  -->
 
@@ -11,7 +19,7 @@
 
         <div class="card-body"><!-- Inicio del card body  -->
 
-          <form method="POST" enctype="multipart/form-data" role="form" class="shadow px-3 py-3"><!-- Inicio del formulario  -->
+          <form method="POST" enctype="multipart/form-data" class="shadow px-3 py-3"><!-- Inicio del formulario  -->
 
             <div class = "form-group"><!-- Inicio primer form group  -->
               <label for="txtID">ID:</label><!--   -->
@@ -29,9 +37,9 @@
             </div><!-- final tercer form group  -->
 
             <div class="btn-group" role="group" aria-label=""><!-- Inicio Botonera  -->
-              <button type="button" class="btn btn-success">Agregar</button>
-              <button type="button" class="btn btn-warning">Modificar</button>
-              <button type="button" class="btn btn-info">Cancelar</button>
+              <button type="submit" name="accion" value="Agregar" class="btn btn-success">Agregar</button>
+              <button type="submit" name="accion" value="Modificar" class="btn btn-warning">Modificar</button>
+              <button type="submit" name="accion" value="Cancelar" class="btn btn-info">Cancelar</button>
             </div><!-- final Botonera  -->
 
           </form><!-- Final del formulario  -->
