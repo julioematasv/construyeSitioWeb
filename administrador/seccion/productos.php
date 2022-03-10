@@ -1,10 +1,19 @@
 <?php include("../template/cabecera.php");  ?>
 <?php
 
-print_r($_POST);
+$txtID=(isset($_POST["txtID"])) ? $_POST["txtID"] :"";
 
-print_r($_FILES);
+$txtNombre=(isset($_POST["txtNombre"])) ? $_POST["txtNombre"] :"";
 
+$txtImagen=(isset($_FILES["txtImagen"]["name"])) ? $_FILES["txtImagen"]["name"] :"";
+
+$accion=(isset($_POST["accion"])) ? $_POST["accion"] :"";
+
+echo "<br />";
+echo $txtID."<br />";
+echo $txtNombre."<br />";
+echo $txtImagen."<br />";
+echo $accion."<br />";
 
 ?>
 
