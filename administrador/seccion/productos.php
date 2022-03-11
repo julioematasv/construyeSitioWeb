@@ -18,6 +18,7 @@ echo $accion."<br />";
 switch ($accion)
 {
   case "Agregar":
+    //INSERT INTO `libros` (`id`, `nombre`, `imagen`) VALUES (NULL, 'Libro PHP', 'imagen.jpg');
     echo "Presionado boton Agregar";
     break;
 
