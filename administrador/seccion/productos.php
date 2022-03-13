@@ -15,10 +15,36 @@ echo $txtNombre."<br />";
 echo $txtImagen."<br />";
 echo $accion."<br />";
 
+/* Inicio de la conexion a la base de datos  */
+// Variables
+$servername = "localhost";
+$dbname = "sitio";
+$usuario = "root";
+$password = "Losmimes123";
+
+try 
+{
+  $conexion = new PDO("mysql:host=$servername;dbname=$dbname", $usuario, $password);
+
+      echo "Conectado... a Sistema";
+
+} 
+
+catch (PDOException $e) 
+
+{
+ die($e->getMessage());
+}
+
+$conexion = null;
+
 switch ($accion)
 {
   case "Agregar":
     //INSERT INTO `libros` (`id`, `nombre`, `imagen`) VALUES (NULL, 'Libro PHP', 'imagen.jpg');
+    $sentencia = $conexion->prepare("INSERT INTO `libros` (`id`, `nombre`, `imagen`) VALUES (NULL, 'Libro PHP', 'imagen.jpg');");
+    $sentencia->execute();
+
     echo "Presionado boton Agregar";
     break;
 
