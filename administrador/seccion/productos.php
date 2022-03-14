@@ -6,12 +6,14 @@ $txtNombre=(isset($_POST["txtNombre"])) ? $_POST["txtNombre"] :"";
 $txtImagen=(isset($_FILES["txtImagen"]["name"])) ? $_FILES["txtImagen"]["name"] :"";
 $accion=(isset($_POST["accion"])) ? $_POST["accion"] :"";
 
+
 include ("../config/bd.php");
 switch ($accion)
 {
   case "Agregar":
-    //INSERT INTO `libros` (`id`, `nombre`, `imagen`) VALUES (NULL, 'Libro PHP', 'imagen.jpg');
-    $sentencia = $conexion->prepare("INSERT INTO `libros` (`id`, `nombre`, `imagen`) VALUES (NULL, 'Libro PHP', 'imagen.jpg');");
+    $sentencia = $conexion->prepare("INSERT INTO libros (nombre,imagen) VALUES (:nombre,:imagen);");
+    $sentencia->bindParam(':nombre',$txtNombre);
+      $sentencia->bindParam(':imagen',$txtImagen);
     $sentencia->execute();
 
     echo "Presionado boton Agregar";
