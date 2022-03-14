@@ -26,6 +26,13 @@ switch ($accion)
     break;
 
   case "Seleccionar":
+      $sentencia = $conexion->prepare("SELECT * FROM libros WHERE id=:id");
+      $sentencia->bindParam(':id',$txtID);
+      $sentencia->execute();
+      $libro=$sentencia->fetch(PDO::FETCH_LAZY);
+
+      $txtNombre=$libro['nombre'];
+      $txtImagen=$libro['imagen'];
     //echo "Presionado boton Seleccionar";
     break;
 
@@ -57,16 +64,17 @@ $listaLibros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
             <div class = "form-group"><!-- Inicio primer form group  -->
               <label for="txtID">ID:</label><!--   -->
-              <input type="text" class="form-control" id="txtID" placeholder="Enter ID"><!--   -->
+              <input type="text" class="form-control" value="<?php echo $txtID; ?>" id="txtID" placeholder="Enter ID"><!--   -->
             </div><!-- final primer form group  -->
 
             <div class="form-group"><!-- Inicio segundo form group  -->
               <label for="txtNombre">Nombre:</label>
-              <input type="text" class="form-control" name="txtNombre" id="txtNombre" placeholder="Nombre de Libro">
+              <input type="text" class="form-control" value="<?php echo $txtNombre; ?>" name="txtNombre" id="txtNombre" placeholder="Nombre de Libro">
             </div><!-- final segundo form group  -->
 
             <div class="form-group"><!-- Inicio tercer form group  -->
               <label for="txtImagen">Imagen:</label>
+                <?php echo $txtImagen; ?>
               <input type="file" class="form-control" name="txtImagen" id="txtImagen">
             </div><!-- final tercer form group  -->
 
@@ -110,7 +118,6 @@ $listaLibros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
             <td><?php echo $libro['imagen']; ?></td>
 
             <td>
-                Seleccionar | Borrar
                 <form  method="post">
                     <input type="hidden" name="txtID" id="txtID" value="<?php echo $libro['id']; ?>">
 
