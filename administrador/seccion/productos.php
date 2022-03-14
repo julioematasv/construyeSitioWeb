@@ -2,42 +2,11 @@
 <?php
 
 $txtID=(isset($_POST["txtID"])) ? $_POST["txtID"] :"";
-
 $txtNombre=(isset($_POST["txtNombre"])) ? $_POST["txtNombre"] :"";
-
 $txtImagen=(isset($_FILES["txtImagen"]["name"])) ? $_FILES["txtImagen"]["name"] :"";
-
 $accion=(isset($_POST["accion"])) ? $_POST["accion"] :"";
 
-echo "<br />";
-echo $txtID."<br />";
-echo $txtNombre."<br />";
-echo $txtImagen."<br />";
-echo $accion."<br />";
-
-/* Inicio de la conexion a la base de datos  */
-// Variables
-$servername = "localhost";
-$dbname = "sitio";
-$usuario = "root";
-$password = "Losmimes123";
-
-try 
-{
-  $conexion = new PDO("mysql:host=$servername;dbname=$dbname", $usuario, $password);
-
-      echo "Conectado... a Sistema";
-
-} 
-
-catch (PDOException $e) 
-
-{
- die($e->getMessage());
-}
-
-$conexion = null;
-
+include ("../config/bd.php");
 switch ($accion)
 {
   case "Agregar":
