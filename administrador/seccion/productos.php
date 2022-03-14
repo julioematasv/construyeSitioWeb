@@ -13,10 +13,8 @@ switch ($accion)
   case "Agregar":
     $sentencia = $conexion->prepare("INSERT INTO libros (nombre,imagen) VALUES (:nombre,:imagen);");
     $sentencia->bindParam(':nombre',$txtNombre);
-      $sentencia->bindParam(':imagen',$txtImagen);
+    $sentencia->bindParam(':imagen',$txtImagen);
     $sentencia->execute();
-
-    echo "Presionado boton Agregar";
     break;
 
   case "Modificar":
@@ -28,6 +26,9 @@ switch ($accion)
     break;
 }
 
+$sentencia = $conexion->prepare("SELECT * FROM libros");
+$sentencia->execute();
+$listaLibros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
     <div class="col-md-5"><!-- Inicio col md 5  -->
@@ -91,14 +92,14 @@ switch ($accion)
         </thead><!-- final cabecera tabla  -->
 
         <tbody><!-- Inicio cuerpo tabla  -->
-
+        <?php foreach ($listaLibros as $libro) { ?>
           <tr>
-
-            <td>5</td>
-            <td>Aprende PHP</td>
-            <td>imagen.jpg</td>
+            <td><?php echo $libro['id']; ?></td>
+            <td><?php echo $libro['nombre']; ?></td>
+            <td><?php echo $libro['imagen']; ?></td>
             <td>Seleccionar | Borrar</td>
           </tr>
+        <?php } ?>
 
         </tbody><!-- final cuerpo tabla  -->
 
