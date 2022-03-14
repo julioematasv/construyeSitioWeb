@@ -24,6 +24,17 @@ switch ($accion)
   case "Cancelar":
     echo "Presionado boton Cancelar";
     break;
+
+  case "Seleccionar":
+    //echo "Presionado boton Seleccionar";
+    break;
+
+  case "Borrar":
+    //echo "Presionado boton Borrar";
+      $sentencia = $conexion->prepare("DELETE FROM libros WHERE id=:id");
+      $sentencia->bindParam(':id',$txtID);
+      $sentencia->execute();
+    break;
 }
 
 $sentencia = $conexion->prepare("SELECT * FROM libros");
@@ -31,7 +42,7 @@ $sentencia->execute();
 $listaLibros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-    <div class="col-md-5"><!-- Inicio col md 5  -->
+    <div class="col-md-4"><!-- Inicio col md 5  -->
 
 
       <div class="card"><!-- Inicio del card  -->
@@ -78,7 +89,7 @@ $listaLibros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
       
     </div><!-- final col md 5  -->
 
-    <div class="col-md-7"><!-- Inicio col md 7  -->
+    <div class="col-md-8"><!-- Inicio col md 7  -->
 
       <table class="table table table-striped table-bordered table-hover"><!-- Inicio tabla  -->
 
@@ -97,7 +108,18 @@ $listaLibros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
             <td><?php echo $libro['id']; ?></td>
             <td><?php echo $libro['nombre']; ?></td>
             <td><?php echo $libro['imagen']; ?></td>
-            <td>Seleccionar | Borrar</td>
+
+            <td>
+                Seleccionar | Borrar
+                <form  method="post">
+                    <input type="hidden" name="txtID" id="txtID" value="<?php echo $libro['id']; ?>">
+
+                    <input type="submit" name="accion" value="Seleccionar" class="btn btn-success" />
+
+                    <input type="submit" name="accion" value="Borrar" class="btn btn-danger" />
+                </form>
+            </td>
+              
           </tr>
         <?php } ?>
 
