@@ -12,7 +12,7 @@
 
             <div class="card-body">
               <h3 class="card-title">Libro Python</h3>
-              <a name="" id="" class="btn btn-primary" href="#" role="button">Ver Más</a>
+              <a id="" class="btn btn-primary" href="#" role="button">Ver Más</a>
             </div>
           </div>
         </div>
@@ -25,7 +25,7 @@
 
             <div class="card-body">
               <h3 class="card-title">Libro PHP</h3>
-              <a name="" id="" class="btn btn-primary" href="#" role="button">Ver Más</a>
+              <a id="" class="btn btn-primary" href="#" role="button">Ver Más</a>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
 
             <div class="card-body">
               <h3 class="card-title">Libro PHP</h3>
-              <a name="" id="" class="btn btn-primary" href="#" role="button">Ver Más</a>
+              <a id="" class="btn btn-primary" href="#" role="button">Ver Más</a>
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@
 
             <div class="card-body">
               <h3 class="card-title">Libro PHP MySql</h3>
-              <a name="" id="" class="btn btn-primary" href="#" role="button">Ver Más</a>
+              <a id="" class="btn btn-primary" href="#" role="button">Ver Más</a>
             </div>
           </div>
         </div>
