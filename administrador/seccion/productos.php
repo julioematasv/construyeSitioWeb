@@ -11,14 +11,49 @@ include ("../config/bd.php");
 switch ($accion)
 {
   case "Agregar":
-    $sentencia = $conexion->prepare("INSERT INTO libros (nombre,imagen) VALUES (:nombre,:imagen);");
-    $sentencia->bindParam(':nombre',$txtNombre);
-    $sentencia->bindParam(':imagen',$txtImagen);
-    $sentencia->execute();
+    $sentenciaSQL = $conexion->prepare("INSERT INTO libros (nombre,imagen) VALUES (:nombre,:imagen);");
+    $sentenciaSQL->bindParam(':nombre',$txtNombre);
+    $sentenciaSQL->bindParam(':imagen',$txtImagen);
+    $sentenciaSQL->execute();
     break;
 
   case "Modificar":
-    echo "Presionado boton Modificar";
+    $sentenciaSQL= $conexion->prepare("UPDATE libros SET nombre=:nombre WHERE id=:id");
+    $sentenciaSQL->bindParam(':nombre',$txtNombre);
+    $sentenciaSQL->bindParam(':id',$txtID);
+    $sentenciaSQL->execute();
+
+    if($txtImagen!=""){
+
+      $fecha= new DateTime();
+      $nombreArchivo=($txtImagen!="")?$fecha->getTimestamp()."_".$_FILES["txtImagen"]["name"]:"imagen.jpg";
+      $tmpImagen=$_FILES["txtImagen"]["tmp_name"];
+
+      move_uploaded_file($tmpImagen,"../../img/".$nombreArchivo);
+
+      $sentenciaSQL= $conexion->prepare("SELECT imagen FROM libros WHERE id=:id");
+      $sentenciaSQL->bindParam(':id',$txtID);
+      $sentenciaSQL->execute();
+      $libro=$sentenciaSQL->fetch(PDO::FETCH_LAZY);
+      
+      if( isset($libro["imagen"]) &&($libro["imagen"]!="imagen.jpg") ){
+
+          if(file_exists("../../img/".$libro["imagen"])){
+
+              unlink("../../img/".$libro["imagen"]);
+          }
+
+      }
+
+      
+
+      $sentenciaSQL= $conexion->prepare("UPDATE libros SET imagen=:imagen WHERE id=:id");
+      $sentenciaSQL->bindParam(':imagen',$nombreArchivo);
+      $sentenciaSQL->bindParam(':id',$txtID);
+      $sentenciaSQL->execute();
+      }
+      header("Location:productos.php");
+      echo "Presionado boton Modificar";
     break;
 
   case "Cancelar":
@@ -26,10 +61,10 @@ switch ($accion)
     break;
 
   case "Seleccionar":
-      $sentencia = $conexion->prepare("SELECT * FROM libros WHERE id=:id");
-      $sentencia->bindParam(':id',$txtID);
-      $sentencia->execute();
-      $libro=$sentencia->fetch(PDO::FETCH_LAZY);
+      $sentenciaSQL = $conexion->prepare("SELECT * FROM libros WHERE id=:id");
+      $sentenciaSQL->bindParam(':id',$txtID);
+      $sentenciaSQL->execute();
+      $libro=$sentenciaSQL->fetch(PDO::FETCH_LAZY);
 
       $txtNombre=$libro['nombre'];
       $txtImagen=$libro['imagen'];
@@ -38,18 +73,18 @@ switch ($accion)
 
   case "Borrar":
     //echo "Presionado boton Borrar";
-      $sentencia = $conexion->prepare("DELETE FROM libros WHERE id=:id");
-      $sentencia->bindParam(':id',$txtID);
-      $sentencia->execute();
+      $sentenciaSQL = $conexion->prepare("DELETE FROM libros WHERE id=:id");
+      $sentenciaSQL->bindParam(':id',$txtID);
+      $sentenciaSQL->execute();
     break;
 }
 
-$sentencia = $conexion->prepare("SELECT * FROM libros");
-$sentencia->execute();
-$listaLibros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+$sentenciaSQL = $conexion->prepare("SELECT * FROM libros");
+$sentenciaSQL->execute();
+$listaLibros=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-    <div class="col-md-4"><!-- Inicio col md 5  -->
+    <div class="col-md-5"><!-- Inicio col md 5  -->
 
 
       <div class="card"><!-- Inicio del card  -->
@@ -74,7 +109,17 @@ $listaLibros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
             <div class="form-group"><!-- Inicio tercer form group  -->
               <label for="txtImagen">Imagen:</label>
-                <?php echo $txtImagen; ?>
+              <br>
+
+                <?php
+                if($txtImagen!=""){
+                ?>
+
+                   <img class="img-thumbnail rounded" src="../../img/<?php echo $txtImagen; ?>" width="50" alt="IMG">
+
+                <?php 
+                  }
+                ?>
               <input type="file" class="form-control" name="txtImagen" id="txtImagen">
             </div><!-- final tercer form group  -->
 
@@ -97,7 +142,7 @@ $listaLibros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
       
     </div><!-- final col md 5  -->
 
-    <div class="col-md-8"><!-- Inicio col md 7  -->
+    <div class="col-md-7"><!-- Inicio col md 7  -->
 
       <table class="table table table-striped table-bordered table-hover"><!-- Inicio tabla  -->
 
@@ -115,7 +160,12 @@ $listaLibros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
           <tr>
             <td><?php echo $libro['id']; ?></td>
             <td><?php echo $libro['nombre']; ?></td>
-            <td><?php echo $libro['imagen']; ?></td>
+
+            <td>
+
+              <img class="img-thumbnail rounded" src="../../img/<?php echo $libro['imagen']; ?>" width="50" alt="IMG">
+            
+            </td>
 
             <td>
                 <form  method="post">
