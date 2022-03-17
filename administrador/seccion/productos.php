@@ -18,43 +18,41 @@ switch ($accion)
     break;
 
   case "Modificar":
-    $sentenciaSQL= $conexion->prepare("UPDATE libros SET nombre=:nombre WHERE id=:id");
-    $sentenciaSQL->bindParam(':nombre',$txtNombre);
-    $sentenciaSQL->bindParam(':id',$txtID);
-    $sentenciaSQL->execute();
-
-    if($txtImagen!=""){
-
-      $fecha= new DateTime();
-      $nombreArchivo=($txtImagen!="")?$fecha->getTimestamp()."_".$_FILES["txtImagen"]["name"]:"imagen.jpg";
-      $tmpImagen=$_FILES["txtImagen"]["tmp_name"];
-
-      move_uploaded_file($tmpImagen,"../../img/".$nombreArchivo);
-
-      $sentenciaSQL= $conexion->prepare("SELECT imagen FROM libros WHERE id=:id");
+      $sentenciaSQL= $conexion->prepare("UPDATE libros SET nombre=:nombre WHERE id=:id");
+      $sentenciaSQL->bindParam(':nombre',$txtNombre);
       $sentenciaSQL->bindParam(':id',$txtID);
       $sentenciaSQL->execute();
-      $libro=$sentenciaSQL->fetch(PDO::FETCH_LAZY);
       
-      if( isset($libro["imagen"]) &&($libro["imagen"]!="imagen.jpg") ){
+      if($txtImagen!=""){
 
-          if(file_exists("../../img/".$libro["imagen"])){
+          $fecha= new DateTime();
+          $nombreArchivo=($txtImagen!="")?$fecha->getTimestamp()."_".$_FILES["txtImagen"]["name"]:"imagen.jpg";
+          
+          $tmpImagen=$_FILES["txtImagen"]["tmp_name"];
 
-              unlink("../../img/".$libro["imagen"]);
+          move_uploaded_file($tmpImagen,"../../img/".$nombreArchivo);
+
+          $sentenciaSQL= $conexion->prepare("SELECT imagen FROM libros WHERE id=:id");
+          $sentenciaSQL->bindParam(':id',$txtID);
+          $sentenciaSQL->execute();
+          $libro=$sentenciaSQL->fetch(PDO::FETCH_LAZY);
+          
+          if( isset($libro["imagen"]) &&($libro["imagen"]!="imagen.jpg") ){
+
+              if(file_exists("../../img/".$libro["imagen"])){
+
+                  unlink("../../img/".$libro["imagen"]);
+              }
+
           }
 
-      }
-
-      
-
-      $sentenciaSQL= $conexion->prepare("UPDATE libros SET imagen=:imagen WHERE id=:id");
-      $sentenciaSQL->bindParam(':imagen',$nombreArchivo);
-      $sentenciaSQL->bindParam(':id',$txtID);
-      $sentenciaSQL->execute();
+          $sentenciaSQL= $conexion->prepare("UPDATE libros SET imagen=:imagen WHERE id=:id");
+          $sentenciaSQL->bindParam(':imagen',$nombreArchivo);
+          $sentenciaSQL->bindParam(':id',$txtID);
+          $sentenciaSQL->execute();
       }
       header("Location:productos.php");
-      echo "Presionado boton Modificar";
-    break;
+      break;
 
   case "Cancelar":
     echo "Presionado boton Cancelar";
