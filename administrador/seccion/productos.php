@@ -13,7 +13,17 @@ switch ($accion)
   case "Agregar":
     $sentenciaSQL = $conexion->prepare("INSERT INTO libros (nombre,imagen) VALUES (:nombre,:imagen);");
     $sentenciaSQL->bindParam(':nombre',$txtNombre);
-    $sentenciaSQL->bindParam(':imagen',$txtImagen);
+
+    $fecha = new DateTime($sentenciaSQL->)
+    $nombreArchivo=($txtImagen!="")?$fecha->getTimestamp()."_".$_FILES["txtImagen"]["name"]:"imagen.jpg";
+
+    $tmpImagen=$_FILES["txtImagen"]["tmp_name"];
+
+    if($txtImagen!=""){
+      move_uploaded_file($tmpImagen,"../../img".$nombreArchivo);
+    }
+
+    $sentenciaSQL->bindParam(':imagen',$nombreArchivo);
     $sentenciaSQL->execute();
     break;
 
@@ -84,9 +94,9 @@ switch ($accion)
           }
         }
 
-      /* $sentenciaSQL = $conexion->prepare("DELETE FROM libros WHERE id=:id");
+      $sentenciaSQL = $conexion->prepare("DELETE FROM libros WHERE id=:id");
       $sentenciaSQL->bindParam(':id',$txtID);
-      $sentenciaSQL->execute(); */
+      $sentenciaSQL->execute();
     break;
 }
 
